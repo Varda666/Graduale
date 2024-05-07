@@ -1,3 +1,4 @@
+from django.db.models import Count, Q
 from rest_framework.generics import (CreateAPIView, UpdateAPIView,
                                      RetrieveAPIView, DestroyAPIView,
                                      ListAPIView)
@@ -69,3 +70,31 @@ class IssueListView(ListAPIView):
     serializer_class = IssueSerializer
     #permission_classes = [IsAuthenticated, IsModerator | IsOwner]
 
+class ImportantIssueListView(ListAPIView):
+    serializer_class = IssueSerializer
+    # permission_classes = [IsAuthenticated, IsModerator | IsOwner]
+
+    def get_queryset(self):
+        queryset = Issue.objects.filter(Q(is_critical=True) & Q(status='new') | Q(status='suspended'))
+        return queryset
+
+
+class ImportantIssueNewListView(ListAPIView):
+    serializer_class = IssueSerializer
+    # permission_classes = [IsAuthenticated, IsModerator | IsOwner]
+
+    def get_queryset(self):
+        queryset = []
+        new_issues = Issue.objects.filter(
+            Q(status='new') | Q(status='suspended')
+        )
+        in_progress_issues = Issue.objects.filter(
+            Q(status='in progress')
+        )
+        for new_issue in new_issues:
+            for in_progress_issue in in_progress_issues:
+                if new_issue.project_name == in_progress_issue.project_name:
+                    queryset.append(new_issue)
+                else:
+                    pass
+        return queryset

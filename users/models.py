@@ -26,6 +26,7 @@ class User(AbstractUser):
     # )
     email = models.EmailField(unique=True, verbose_name='email')
     name = models.CharField(max_length=150, verbose_name='имя')
+    # position = models.CharField(max_length=150, verbose_name='должность')
     is_staff = models.BooleanField(default=False, verbose_name="статус staff")
     is_active = models.BooleanField(
         default=True, verbose_name="статус активности"

@@ -1,10 +1,12 @@
 
 from rest_framework.generics import (CreateAPIView, UpdateAPIView,
-                                     RetrieveAPIView, DestroyAPIView)
+                                     RetrieveAPIView, DestroyAPIView, ListAPIView)
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django.db.models import Count, Q
 from users.models import User
 from issues.permissions import IsOwner
 from users.serializers import UserSerializer
+from rest_framework.response import Response
 
 
 class UserCreateView(CreateAPIView):
@@ -29,3 +31,16 @@ class UserDestroyView(DestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsAdminUser | IsOwner]
 
+class UserListView(ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        queryset = User.objects.annotate(
+            num_issues=Count(
+                'executed_issues',
+                filter=Q(executed_issues__status='new') | Q(executed_issues__status='in progress'),
+
+            )
+        ).order_by('-num_issues')
+        return queryset

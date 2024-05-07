@@ -4,7 +4,7 @@ from django.contrib import admin
 from issues.views.issue import (IssueListView, IssueRetrieveView, IssueDestroyView,
                                 IssueCreateView, IssueUpdateView, ProjectListView,
                                 ProjectDestroyView, ProjectUpdateView, ProjectRetrieveView,
-                                ProjectCreateView)
+                                ProjectCreateView, ImportantIssueListView, ImportantIssueNewListView)
 
 
 urlpatterns = [
@@ -15,6 +15,8 @@ urlpatterns = [
     path('projects/create/', ProjectCreateView.as_view(), name='project_create'),
     path('projects/delete/<int:pk>/', ProjectDestroyView.as_view(), name='project_delete'),
     path('', IssueListView.as_view(), name='issue_list'),
+    path('important/', ImportantIssueListView.as_view(), name='important_issue_list'),
+    path('important/new/', ImportantIssueNewListView.as_view(), name='important_issue_list'),
     path('<int:pk>/', IssueRetrieveView.as_view(), name='issue_detail'),
     path('update/<int:pk>/', IssueUpdateView.as_view(), name='issue_update'),
     path('create/', IssueCreateView.as_view(), name='issue_create'),
