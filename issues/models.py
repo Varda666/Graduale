@@ -35,11 +35,13 @@ class Issue(models.Model):
     )
     owner = models.ForeignKey(
         to='users.User', to_field='email',
-        verbose_name='постановщик задачи', on_delete=models.DO_NOTHING
+        verbose_name='постановщик задачи', on_delete=models.DO_NOTHING,
+        related_name='owned_issues',
     )
     issue_executor = models.ForeignKey(
-        to='users.User', to_field='email',
-        verbose_name='исполнитель', on_delete=models.DO_NOTHING
+        to='users.User', to_field='email', default=None, null=True,
+        verbose_name='исполнитель', on_delete=models.DO_NOTHING,
+        related_name='executed_issues'
     )
     param_term_of_execution = models.CharField(
         choices=PARAM_TERM_CHOISES, max_length=150,
@@ -48,8 +50,8 @@ class Issue(models.Model):
     term_of_execution = models.IntegerField(
         verbose_name='время выполнения'
     )
-    project_name = models.ManyToManyField(
-        to='Project', to_field='pk', symmetrical=False, default=None,
+    project_name = models.ForeignKey(
+        to='Project', default=None,
         verbose_name='название проекта', on_delete=models.DO_NOTHING
     )
     status = models.CharField(
@@ -57,6 +59,7 @@ class Issue(models.Model):
         verbose_name='переодичность'
     )
     is_public = models.BooleanField(default=False, verbose_name='публичность')
+    is_critical = models.BooleanField(default=False, verbose_name='публичность')
 
 
     class Meta:

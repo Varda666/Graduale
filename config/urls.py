@@ -20,8 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path(
         '',
-        include(('useful_habits.urls', 'useful_habits'),
-                namespace='useful_habits')
+        include(('issues.urls', 'issues'),
+                namespace='issues')
     ),
     path('users/', include(('users.urls', 'users'), namespace='users')),
     path(

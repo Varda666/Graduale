@@ -1,12 +1,8 @@
-
 import os
 from datetime import timedelta
 from pathlib import Path
-
-
 from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!n2y=8*0^yc21#7md9l*g38$0=#epa8&kgs8l%ouce&eevqp^r'
@@ -29,7 +25,7 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework',
     'rest_framework_simplejwt',
-    'useful_habits',
+    'issues',
     'users',
     'drf_yasg',
     'corsheaders',
@@ -47,10 +43,10 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Настройки срока действия токенов
+
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(hours=4),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
     'AUTH_HEADER_TYPES': ('Bearer',),
@@ -94,12 +90,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        "PASSWORD": os.getenv('DB_PASSWORD'),
-        "HOST": os.getenv('DB_HOST'),
-        "PORT": os.getenv('DB_PORT')
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        "PASSWORD": os.getenv('POSTGRES_PASSWORD'),
+        "HOST": os.getenv('POSTGRES_HOST'),
+        "PORT": os.getenv('POSTGRES_PORT')
     }
 }
 
@@ -132,13 +128,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # STATICFILES_DIRS = (
-#     BASE_DIR / 'static',
-# )
-
+#      BASE_DIR / 'static',
+#  )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# MEDIA_URL = 'media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -175,22 +167,16 @@ CSRF_TRUSTED_ORIGINS = [
     '<http://127.0.0.1:8000/>'
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
-
-# URL-адрес брокера сообщений
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
 
-# URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
 
-# Часовой пояс для работы Celery
 CELERY_TIMEZONE = "Europe/Moscow"
 
-# Флаг отслеживания выполнения задач
 CELERY_TASK_TRACK_STARTED = True
 
-# Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {

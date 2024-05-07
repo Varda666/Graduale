@@ -4,7 +4,7 @@ from rest_framework.generics import (CreateAPIView, UpdateAPIView,
 from rest_framework.permissions import IsAuthenticated
 
 from issues.models import Project, Issue
-from issues.permissions import IsModerator, IsOwnerOrPublic, IsOwner
+from issues.permissions import IsModerator, IsOwner
 from issues.serializers.issue import IssueSerializer, ProjectSerializer
 
 
