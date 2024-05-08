@@ -4,7 +4,7 @@ from rest_framework.generics import (CreateAPIView, UpdateAPIView,
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.db.models import Count, Q
 from users.models import User
-from issues.permissions import IsOwner
+from issues.permissions import IsOwner, IsModerator
 from users.serializers import UserSerializer
 from rest_framework.response import Response
 
@@ -23,13 +23,13 @@ class UserUpdateView(UpdateAPIView):
 class UserRetrieveView(RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
 
 
 class UserDestroyView(DestroyAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser | IsOwner]
+    permission_classes = [IsAuthenticated, IsModerator | IsOwner]
 
 class UserListView(ListAPIView):
     serializer_class = UserSerializer

@@ -1,18 +1,18 @@
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
-from telebot import TeleBot
+from telegram import Bot
 
 
-bot = TeleBot(settings.TELEGRAM_BOT_API_KEY, threaded=False)
+bot = Bot(token=settings.TELEGRAM_BOT_API_KEY)
 
 
 class Command(BaseCommand):
 
-   def send_message(self, *args, **kwargs):
-        bot.send_message(
-            chat_id=kwargs.get['chat_id'],
-            text=kwargs.get['text']
+   def handle(self, *args, **kwargs):
+       bot.send_message(
+            chat_id=kwargs.get('chat_id'),
+            text=kwargs.get('text')
         )
 
 
