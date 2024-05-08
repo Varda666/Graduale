@@ -16,3 +16,4 @@ urlpatterns = [
     path('token/verify/', TokenVerifyView.as_view(), name='token_verify')
 ]
 
+

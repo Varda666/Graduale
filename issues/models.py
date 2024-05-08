@@ -14,6 +14,7 @@ class Project(models.Model):
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
 
+
 class Issue(models.Model):
     PARAM_TERM_CHOISES = [
         ('minutes', 'minutes'),
@@ -61,8 +62,8 @@ class Issue(models.Model):
     is_public = models.BooleanField(default=False, verbose_name='публичность')
     is_critical = models.BooleanField(default=False, verbose_name='публичность')
 
-
     class Meta:
         verbose_name = 'задача'
         verbose_name_plural = 'задачи'
+
 

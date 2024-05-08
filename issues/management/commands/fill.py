@@ -13,7 +13,8 @@ class Command(BaseCommand):
             'is_superuser': False,
             'is_staff': True,
             'is_active': True
-             })
+             }
+                                              )
 
         user2, _ = User.objects.get_or_create(email='vladimir1@mail.ru', defaults={
             'name': 'Vladimir',
@@ -40,18 +41,17 @@ class Command(BaseCommand):
         #     }
         # ]
 
-
         issues_list1 = [
             {
                 'owner': user1,
-                 'issue_name': 'Проверить договор аренды',
-                 'issue_executor': user2,
-                 'param_term_of_execution': 'working days',
-                 'term_of_execution': 2,
-                 'project_name': Project.objects.get(pk=1),
-                 'status': 'new',
-                 'is_public': True,
-                 'is_critical': False,
+                'issue_name': 'Проверить договор аренды',
+                'issue_executor': user2,
+                'param_term_of_execution': 'working days',
+                'term_of_execution': 2,
+                'project_name': Project.objects.get(pk=1),
+                'status': 'new',
+                'is_public': True,
+                'is_critical': False,
             },
             {
                  'owner': user2,

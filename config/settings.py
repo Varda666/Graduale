@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!n2y=8*0^yc21#7md9l*g38$0=#epa8&kgs8l%ouce&eevqp^r'
-# os.getenv('SECRET_KEY'))
 
 DEBUG = True
 
@@ -30,7 +29,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'corsheaders',
     'django_celery_beat',
-    # 'bot',
+
 ]
 
 REST_FRAMEWORK = {
@@ -85,7 +84,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
@@ -127,9 +125,6 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-# STATICFILES_DIRS = (
-#      BASE_DIR / 'static',
-#  )
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -157,11 +152,7 @@ CACHES = {
     }
 }
 
-AUTH_USER_MODEL = 'users.User'
-
-# CORS_ALLOWED_ORIGINS = [
-#      '<http://localhost:8000>',
-#  ]
+#AUTH_USER_MODEL = 'users.User'
 
 CSRF_TRUSTED_ORIGINS = [
     '<http://127.0.0.1:8000/>'
@@ -181,7 +172,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
      'task-name': {
-         'task': 'useful_habits.issues.check_last_visit',  # Путь к задаче
+         'task': 'useful_habits.issues.check_last_visit',
          'schedule': timedelta(days=30),
      },
 }

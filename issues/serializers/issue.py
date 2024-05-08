@@ -14,7 +14,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 class IssueSerializer(serializers.ModelSerializer):
     term_of_execution = serializers.IntegerField(validators=[valid_term_of_execution])
 
-
     def validate_issue_name(self, data):
         list_of_forbidden_words = ['голова', 'нога', 'рука']
         for word in list_of_forbidden_words:
@@ -28,5 +27,4 @@ class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Issue
         fields = "__all__"
-
 

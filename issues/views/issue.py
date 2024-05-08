@@ -70,6 +70,7 @@ class IssueListView(ListAPIView):
     serializer_class = IssueSerializer
     permission_classes = [IsAuthenticated]
 
+
 class ImportantIssueListView(ListAPIView):
     serializer_class = IssueSerializer
     permission_classes = [IsAuthenticated]
@@ -100,15 +101,16 @@ class ImportantIssueNewListView(ListAPIView):
 
         return queryset
 
+
 class ImportantIssueNewRetrieveView(RetrieveAPIView):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
     permission_classes = [IsAuthenticated]
 
+
 class ImportantIssueNewExecutorListView(ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
-
 
     def get_queryset(self):
         issue_pk = self.kwargs['pk']
@@ -125,5 +127,6 @@ class ImportantIssueNewExecutorListView(ListAPIView):
             queryset.append(user_with_min_workload)
             queryset.append(user_from_same_project)
         return queryset
+
 
 

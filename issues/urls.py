@@ -27,3 +27,4 @@ urlpatterns = [
     path('delete/<int:pk>/', IssueDestroyView.as_view(), name='issue_delete'),
 ]
 
+

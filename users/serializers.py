@@ -9,7 +9,6 @@ class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=10, write_only=True)
     executed_issues = serializers.IntegerField
 
-
     class Meta:
         model = User
         fields = ('email', 'password', 'name', 'executed_issues')
@@ -30,8 +29,5 @@ class UserSerializer(serializers.ModelSerializer):
             )
         )
         return executed_issues.issue_name
-
-
-
 
 

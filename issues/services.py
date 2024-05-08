@@ -24,8 +24,6 @@ PeriodicTask.objects.create(
                'be_careful': True,
                'chat_id': settings.MY_CHAT_ID,
                'text': Issue.objects.filter(Q(is_critical=True)).values('issue_name'),
-
-
           }
      ),
      expires=datetime.utcnow() + timedelta(minutes=3)
