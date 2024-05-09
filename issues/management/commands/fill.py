@@ -10,6 +10,7 @@ class Command(BaseCommand):
 
         user1, _ = User.objects.get_or_create(email='ivan1@mail.ru', defaults={
             'name': 'Ivan',
+            'position': 'storekeeper',
             'is_superuser': False,
             'is_staff': True,
             'is_active': True
@@ -18,6 +19,7 @@ class Command(BaseCommand):
 
         user2, _ = User.objects.get_or_create(email='vladimir1@mail.ru', defaults={
             'name': 'Vladimir',
+            'position': 'lawyer',
             'is_superuser': False,
             'is_staff': True,
             'is_active': True
@@ -25,6 +27,7 @@ class Command(BaseCommand):
 
         user3, _ = User.objects.get_or_create(email='aleks1@mail.ru', defaults={
             'name': 'Aleks',
+            'position': 'lawyer',
             'is_superuser': False,
             'is_staff': True,
             'is_active': True
@@ -54,16 +57,16 @@ class Command(BaseCommand):
                 'is_critical': False,
             },
             {
-                 'owner': user2,
-                 'issue_name': 'Проверить договор поставки',
-                 'issue_executor': user2,
-                 'param_term_of_execution': 'working days',
-                 'term_of_execution': 1,
-                 'project_name': Project.objects.get(pk=2),
-                 'status': 'in progress',
-                 'is_public': True,
-                 'is_critical': True,
-             },
+                'owner': user2,
+                'issue_name': 'Проверить договор поставки',
+                'issue_executor': user2,
+                'param_term_of_execution': 'working days',
+                'term_of_execution': 1,
+                'project_name': Project.objects.get(pk=2),
+                'status': 'in progress',
+                'is_public': True,
+                'is_critical': True,
+            },
             {
                 'owner': user3,
                 'issue_name': 'Проверить товар',
@@ -75,7 +78,7 @@ class Command(BaseCommand):
                 'is_public': True,
                 'is_critical': False,
 
-             },
+            },
         ]
 
         issues_for_create = []

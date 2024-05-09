@@ -52,7 +52,7 @@ class Issue(models.Model):
         verbose_name='время выполнения'
     )
     project_name = models.ForeignKey(
-        to='Project', default=None,
+        to='Project', default=None, null=True,
         verbose_name='название проекта', on_delete=models.DO_NOTHING
     )
     status = models.CharField(

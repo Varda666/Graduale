@@ -1,7 +1,6 @@
 from django.db.models import Count, Q
 from rest_framework import serializers
 
-from issues.models import Issue
 from users.models import User
 
 
@@ -11,13 +10,14 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('email', 'password', 'name', 'executed_issues')
+        fields = ('email', 'password', 'name', 'position', 'executed_issues')
 
     def create(self, validated_data):
         user = User.objects.create_user(
             email=validated_data['email'],
             password=validated_data['password'],
-            name=validated_data['name']
+            name=validated_data['name'],
+            position=validated_data['position']
         )
         return user
 

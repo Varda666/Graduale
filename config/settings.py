@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-!n2y=8*0^yc21#7md9l*g38$0=#epa8&kgs8l%ouce&eevqp^r'
+# os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -160,20 +161,20 @@ CSRF_TRUSTED_ORIGINS = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL')
 
-CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND')
 
-CELERY_TIMEZONE = "Europe/Moscow"
+CELERY_TIMEZONE = os.getenv('CELERY_TIMEZONE')
 
-CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TRACK_STARTED = os.getenv('CELERY_TASK_TRACK_STARTED')
 
 CELERY_TASK_TIME_LIMIT = 30 * 60
 
 CELERY_BEAT_SCHEDULE = {
      'task-name': {
-         'task': 'useful_habits.issues.check_last_visit',
-         'schedule': timedelta(days=30),
+         'task': os.getenv('CELERY_BEAT_SCHEDULE_TASK'),
+         'schedule': os.getenv('CELERY_BEAT_SCHEDULE_SCHEDULE'),
      },
 }
 

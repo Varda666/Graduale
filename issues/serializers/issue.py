@@ -17,7 +17,7 @@ class IssueSerializer(serializers.ModelSerializer):
     def validate_issue_name(self, data):
         list_of_forbidden_words = ['голова', 'нога', 'рука']
         for word in list_of_forbidden_words:
-            if word in data['issue_name']:
+            if word in data:
                 raise serializers.ValidationError(
                     f"Название не может содержать слово {word}"
                 )
